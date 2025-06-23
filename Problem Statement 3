@@ -1,0 +1,127 @@
+
+Problem Statement 3:
+
+Step 1: Create & Containerize a Go Program
+
+Goal: Write a simple Go web server that shows the current date and time.
+
+Tasks:
+
+Write a Go program:
+
+package main
+
+import (
+    "fmt"
+    "net/http"
+    "time"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    currentTime := time.Now().Format("2006-01-02 15:04:05")
+    fmt.Fprintf(w, "Current Date and Time: %s", currentTime)
+}
+
+func main() {
+    http.HandleFunc("/", handler)
+    http.ListenAndServe(":8080", nil)
+}
+
+Create a Dockerfile:
+
+FROM golang:1.20-alpine
+
+WORKDIR /app
+
+COPY . .
+
+RUN go build -o date-time-app .
+
+EXPOSE 8080
+
+CMD ["./date-time-app"]
+
+Build and push the Docker image:
+
+docker build -t yourdockerhubusername/date-time-app:latest .
+docker push yourdockerhubusername/date-time-app:latest
+
+Push the source code to GitHub.
+
+
+
+
+
+Step 2: Deploy to Kubernetes
+
+Goal: Use a declarative YAML manifest to deploy the app with 2 replicas.
+
+Example deployment.yaml:
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: date-time-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: date-time-app
+  template:
+    metadata:
+      labels:
+        app: date-time-app
+    spec:
+      containers:
+      - name: date-time-app
+        image: yourdockerhubusername/date-time-app:latest
+        ports:
+        - containerPort: 8080
+
+Apply it:
+
+kubectl apply -f deployment.yaml
+
+
+
+
+
+Step 3: Expose to the Internet
+
+Goal: Make the app reachable publicly.
+
+Example service.yaml:
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: date-time-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: date-time-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+
+Apply it:
+
+kubectl apply -f service.yaml
+
+
+This will provision an external IP (if using Minikube, use minikube service date-time-service --url).
+
+
+
+
+--- Summary Checklist:
+
+* Go app shows current date/time
+* Docker image pushed to DockerHub
+* K8s deployment with 2 replicas
+* Service of type LoadBalancer exposes it publicly
+
+
+
+
