@@ -1,0 +1,41 @@
+Problem Statement 2:
+
+--- Suggested Steps to Complete:
+
+1. Set Up Local K8s Cluster
+
+Install Minikube (simple for local use).
+
+Start the cluster:
+
+minikube start
+
+
+2. Install Security Scanner
+
+For Kubescape:
+
+curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | /bin/bash
+
+
+3. Run Scan
+
+kubescape scan framework nsa --output json --output-file k8s_findings.json
+
+framework nsa is an example; you can choose others like mitre.
+
+
+4. Submit Deliverable
+
+Locate the generated k8s_findings.json file.
+
+Share or upload as required.
+
+
+
+*Outcome:
+You will have a JSON file with the list of Kubernetes cluster security issues found by the scanner.
+
+
+
+
