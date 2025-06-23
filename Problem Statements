@@ -1,0 +1,85 @@
+Problem Statement 1:
+
+---Suggested Deliverables Outline:
+
+1. Product Requirements Document (PRD)
+Sections to include:
+
+Introduction: Context & scope (scanning container images for vulnerabilities).
+
+User Stories:
+
+As a user, I want to see a list of scanned images with vulnerability status.
+
+As a user, I want to filter images by severity level.
+
+As a user, I want to get remediation guidance for vulnerabilities.
+
+
+Functional Requirements:
+
+Dashboard showing summary of scanned images.
+
+Filters by severity (Critical, High, Medium, Low).
+
+Search and pagination for large repositories.
+
+Detailed view for each image: list of vulnerabilities, severity, fix suggestions.
+
+
+Non-Functional Requirements:
+
+Scalability for thousands of images.
+
+Responsive and intuitive UI.
+
+Security and access control.
+
+
+Acceptance Criteria:
+
+Users can find all critical/high vulnerabilities in < 2 clicks.
+
+Scans update regularly or on demand.
+
+
+
+2. Low-Fidelity Wireframes
+Screens to sketch:
+
+Dashboard:
+
+Summary cards: Total Images, Images with Critical Vulns, Images with High Vulns.
+
+Graph/Chart for quick severity breakdown.
+
+
+Images List Page:
+
+Table with: Image Name, Vulnerability Count, Most Severe Level, Last Scan Date.
+
+Filters: Severity, Date Range, Image Name Search.
+
+
+Image Detail Page:
+
+Image Metadata.
+
+List of vulnerabilities with severity, description, fix instructions.
+
+Action buttons: Rescan, Export Report.
+
+
+
+3. (Optional) Development Action Items
+
+Integrate with container registries (e.g., Docker Hub, private registries).
+
+Implement vulnerability scanning engine (e.g., using open-source tools like Clair, Trivy).
+
+Design backend APIs for scan results.
+
+Implement frontend views matching wireframes.
+
+Add user authentication and role-based access control.
+
